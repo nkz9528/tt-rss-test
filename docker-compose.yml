@@ -69,7 +69,7 @@ services:
     depends_on:
       - web-nginx
     extra_hosts:
-      - "host.dev:host-gateway"
+      - "host.dev:${HOST_IP}"
 
 volumes:
   db:
