@@ -22,8 +22,6 @@ services:
       - ./config.d:/opt/tt-rss/config.d:ro
     depends_on:
       - db
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   backups:
     build:
@@ -60,8 +58,6 @@ services:
       - app:/var/www/html:ro
     depends_on:
       - app
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   reverse-proxy:
     build: ./reverse-proxy
@@ -73,7 +69,7 @@ services:
     depends_on:
       - web-nginx
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.dev:host-gateway"
 
 volumes:
   db:
