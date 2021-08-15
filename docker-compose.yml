@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   db:
@@ -13,8 +13,7 @@ services:
 
   app:
     build:
-      context:
-        ./app
+      context: ./app
     restart: unless-stopped
     env_file:
       - .env
@@ -26,8 +25,7 @@ services:
 
   backups:
     build:
-      context:
-        ./app
+      context: ./app
     restart: unless-stopped
     env_file:
       - .env
@@ -40,8 +38,7 @@ services:
 
   updater:
     build:
-      context:
-        ./app
+      context: ./app
     restart: unless-stopped
     env_file:
       - .env
@@ -61,6 +58,18 @@ services:
       - app:/var/www/html:ro
     depends_on:
       - app
+
+  reverse-proxy:
+    build: ./reverse-proxy
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - app:/var/www/html:ro
+    depends_on:
+      - web-nginx
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   db:
