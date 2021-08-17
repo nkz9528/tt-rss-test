@@ -100,4 +100,10 @@ rm -f /tmp/error.log && mkfifo /tmp/error.log && chown app:app /tmp/error.log
 
 touch $DST_DIR/.app_is_ready
 
+THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
+THEME_DST=/var/www/html/tt-rss/themes.local
+
+cd $THEME_DST
+git clone $THEME_REPO
+
 exec /usr/sbin/php-fpm8 --nodaemonize --force-stderr
