@@ -104,6 +104,11 @@ THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
 THEME_DST=/var/www/html/tt-rss/themes.local
 
 cd $THEME_DST
-git clone $THEME_REPO
+if [ ! -d $THEME_DST/tt-rss-feedly-theme/.git ]; then
+	git clone $THEME_REPO
+else
+	git pull origin master
+fi
+
 
 exec /usr/sbin/php-fpm8 --nodaemonize --force-stderr
