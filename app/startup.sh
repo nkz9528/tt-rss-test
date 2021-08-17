@@ -54,17 +54,17 @@ else
 	  	git pull origin master || echo error: failed to update plugin repository.
 fi
 
-THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
-THEME_DST=/var/www/html/tt-rss/themes.local
+# THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
+# THEME_DST=/var/www/html/tt-rss/themes.local
 
-if [ ! -d $THEME_DST/tt-rss-feedly-theme/.git ]; then
-	git clone $THEME_REPO
-else
-  cd $THEME_DST/tt-rss-feedly-theme
-	git pull origin master
-fi
-cd $THEME_DST/tt-rss-feedly-theme
-cp -r -f feedly* $THEME_DST
+# if [ ! -d $THEME_DST/tt-rss-feedly-theme/.git ]; then
+# 	git clone $THEME_REPO
+# else
+#   cd $THEME_DST/tt-rss-feedly-theme
+# 	git pull origin master
+# fi
+# cd $THEME_DST/tt-rss-feedly-theme
+# cp -r -f feedly* $THEME_DST
 
 cp ${SCRIPT_ROOT}/config.docker.php $DST_DIR/config.php
 chmod 644 $DST_DIR/config.php
