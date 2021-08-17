@@ -54,6 +54,18 @@ else
 	  	git pull origin master || echo error: failed to update plugin repository.
 fi
 
+THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
+THEME_DST=/var/www/html/tt-rss/themes.local
+
+if [ ! -d $THEME_DST/tt-rss-feedly-theme/.git ]; then
+	git clone $THEME_REPO
+else
+  cd $THEME_DST/tt-rss-feedly-theme
+	git pull origin master
+fi
+cd $THEME_DST/tt-rss-feedly-theme
+cp -r -f feedly* $THEME_DST
+
 cp ${SCRIPT_ROOT}/config.docker.php $DST_DIR/config.php
 chmod 644 $DST_DIR/config.php
 
@@ -92,6 +104,7 @@ xdebug.client_host = ${TTRSS_XDEBUG_HOST}
 EOF
 fi
 
+
 cd $DST_DIR && sudo -E -u app php8 ./update.php --update-schema=force-yes
 
 rm -f /tmp/error.log && mkfifo /tmp/error.log && chown app:app /tmp/error.log
@@ -100,16 +113,5 @@ rm -f /tmp/error.log && mkfifo /tmp/error.log && chown app:app /tmp/error.log
 
 touch $DST_DIR/.app_is_ready
 
-THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
-THEME_DST=/var/www/html/tt-rss/themes.local
-
-if [ ! -d $THEME_DST/tt-rss-feedly-theme/.git ]; then
-	git clone $THEME_REPO
-else
-  cd $THEME_DST/tt-rss-feedly-theme
-	git pull origin master
-fi
-cd $THEME_DST/tt-rss-feedly-theme
-cp -r -f feedly* $THEME_DST
-
 exec /usr/sbin/php-fpm8 --nodaemonize --force-stderr
+
