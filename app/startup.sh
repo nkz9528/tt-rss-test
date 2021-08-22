@@ -66,6 +66,8 @@ fi
 cd $THEME_DST/tt-rss-feedly-theme
 cp -r -f feedly* $THEME_DST
 
+echo "Header set Access-Control-Allow-Origin *" > /var/www/html/tt-rss/.htaccess
+
 cp ${SCRIPT_ROOT}/config.docker.php $DST_DIR/config.php
 chmod 644 $DST_DIR/config.php
 
