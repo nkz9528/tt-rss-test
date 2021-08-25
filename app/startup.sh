@@ -57,16 +57,15 @@ fi
 THEME_REPO=https://github.com/levito/tt-rss-feedly-theme.git
 THEME_DST=/var/www/html/tt-rss/themes.local
 
+cd $THEME_DST
 if [ ! -d $THEME_DST/tt-rss-feedly-theme/.git ]; then
 	git clone $THEME_REPO
+	cd $THEME_DST/tt-rss-feedly-theme
 else
   cd $THEME_DST/tt-rss-feedly-theme
 	git pull origin master
 fi
-cd $THEME_DST/tt-rss-feedly-theme
 cp -r -f feedly* $THEME_DST
-
-echo "Header set Access-Control-Allow-Origin *" > /var/www/html/tt-rss/.htaccess
 
 cp ${SCRIPT_ROOT}/config.docker.php $DST_DIR/config.php
 chmod 644 $DST_DIR/config.php
