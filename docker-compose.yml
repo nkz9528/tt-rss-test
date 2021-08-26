@@ -65,6 +65,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/www/html:/var/www/html
       - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - /var/log/letsencrypt:/var/log/letsencrypt
     command: ["--version"]
     stdin_open: true
     tty: true
