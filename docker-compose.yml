@@ -66,9 +66,9 @@ services:
       - 80:80
     volumes:
       - app:/var/www/html
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /var/lib/letsencrypt:/var/lib/letsencrypt
-      - /var/log/letsencrypt:/var/log/letsencrypt
+      - ./etc/letsencrypt:/etc/letsencrypt
+      - ./var/lib/letsencrypt:/var/lib/letsencrypt
+      - ./var/log/letsencrypt:/var/log/letsencrypt
 
     command: ["--version"]
     stdin_open: true
